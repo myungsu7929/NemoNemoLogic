@@ -1,3 +1,6 @@
+############
+#Start here#
+############
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
@@ -18,8 +21,7 @@ class NemoCanvas(QGraphicsView):
         self.thickness= 10
         self.pen_mode = 1
         self.pen_color = (0, 0, 0)
-        self.problem_size = 32
-        self.picture_history = []
+        self.problem_size = 16
         self.canvas_scene = QGraphicsScene()
         
         self.setScene(self.canvas_scene)
@@ -42,10 +44,11 @@ class NemoCanvas(QGraphicsView):
     
 
     def mouseMoveEvent(self, event: QMouseEvent) -> None:
-        x = event.pos().x()
-        y = event.pos().y()
-        a = cv2.circle(self.canvas, (x, y) ,self.thickness, self.pen_color, -1, cv2.LINE_AA)
-        self.update_scene()
+        if self.click_status:
+            x = event.pos().x()
+            y = event.pos().y()
+            cv2.circle(self.canvas, (x, y) ,self.thickness, self.pen_color, -1, cv2.LINE_AA)
+            self.update_scene()
         return super().mouseMoveEvent(event)
     
 
@@ -53,14 +56,14 @@ class NemoCanvas(QGraphicsView):
         self.thickness+= int(event.angleDelta().y()/10)
         if self.thickness< 0:
             self.thickness = 10
-        if self.thickness> 50:
-            self.thickness = 50
+        if self.thickness> 75:
+            self.thickness = 75
         self.display_state()
         return super().wheelEvent(event)
     
     def keyPressEvent(self, event: QKeyEvent) -> None:
         #change pen color between black and white 
-        if event.key() == Qt.Key_M:
+        if event.key() == Qt.Key_C:
             if self.pen_mode:
                 self.pen_color = (255,255,255)
             else:
@@ -68,7 +71,7 @@ class NemoCanvas(QGraphicsView):
             self.pen_mode = (self.pen_mode+1)%2
             self.display_state()
         
-        if event.key() == Qt.Key_C:
+        if event.key() == Qt.Key_X:
             self.canvas = np.ones((1024,1024,3))*255
             self.update_scene()
         return super().keyPressEvent(event)
@@ -87,11 +90,14 @@ class NemoCanvas(QGraphicsView):
             with gzip.open(save_path, "wb") as f:
                 pickle.dump(temp_problem, f,  pickle.HIGHEST_PROTOCOL)
             f.close()
+            self.form_statusbar.showMessage("문제저장 성공")
         except:
+            self.form_statusbar.showMessage("문제저장 실패")
             pass
 
     def apply(self):
         self.canvas = Problem(self.canvas, self.problem_size).preview
+        self.form_statusbar.showMessage("도트로 변환했습니다.")
         self.update_scene()
         
     def set_problem_size(self, n):
@@ -101,3 +107,7 @@ class NemoCanvas(QGraphicsView):
     def display_state(self):
         mode = "Draw" if self.pen_mode == 1 else "Erase"
         self.form_statusbar.showMessage(f"Thickness: {self.thickness} Mode: {mode} Problem_size: {self.problem_size}")
+
+##########
+#End here#
+##########

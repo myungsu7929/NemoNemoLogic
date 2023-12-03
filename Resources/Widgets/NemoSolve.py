@@ -1,3 +1,6 @@
+############
+#Start here#
+############
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
@@ -8,16 +11,14 @@ from functools import partial
 
 from Resources.Components.NemoWelcome import NemoWelcom
 from Resources.Components.NemoSolvingBoard import SolvingBoard
-from Resources.Logical.Problem import Problem
 from Resources.Logical.utils import convert_to_nums
-
 
 #widget #2
 class NemoSolve(QWidget):
     ChildComponents = []
-    def __init__(self, main):
+    def __init__(self, app):
         super().__init__()
-        self.main = main
+        self.app = app
         self.load_problem_button = QPushButton("문제 불러오기")
         self.is_correct_button = QPushButton("정답 확인하기")
         self.back_button = QPushButton("뒤로가기")
@@ -35,7 +36,6 @@ class NemoSolve(QWidget):
         NemoSolve.ChildComponents.append(self.statusbar)
         NemoSolve.ChildComponents.append(self.row_hint_table)
         NemoSolve.ChildComponents.append(self.col_hint_table)
-
 
         self.apply_childs()
         self.set_individual_componets()
@@ -57,14 +57,16 @@ class NemoSolve(QWidget):
         self.row_hint_table.setGeometry(1120,100, 300,800)
         self.col_hint_table.setGeometry(1440,100, 300,800)
   
-  
     def apply_style_sheet(self):
-        pass
+        self.statusbar.setStyleSheet("background-color:#CCCCFF;")
+        self.load_problem_button.setStyleSheet("background-color:#CCCCFF;")
+        self.is_correct_button.setStyleSheet("background-color:#CCCCFF;")
+        self.back_button.setStyleSheet("background-color:#CCCCFF;")
 
     def set_button_event(self):
         self.load_problem_button.clicked.connect(self.load_problem)
         self.is_correct_button.clicked.connect(self.compare_with_users)
-        self.back_button.clicked.connect(partial(self.main.goto, 0))
+        self.back_button.clicked.connect(partial(self.app.goto, 0))
 
     def load_problem(self):
         load_path = QFileDialog.getOpenFileName()[0]
@@ -102,7 +104,6 @@ class NemoSolve(QWidget):
             for idx, hint in enumerate(hints):
                 table.appendPlainText(f"{kind} {idx+1}=> {hint} ")
 
-
     def compare_with_users(self):
         if self.problem is not None:
             user_answer = self.solving_board.get_user_answer()
@@ -116,3 +117,7 @@ class NemoSolve(QWidget):
         else:
             text = "문제를 먼저 로드해 주세요."
             self.display_state(text)
+
+##########
+#End here#
+##########

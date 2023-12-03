@@ -1,3 +1,6 @@
+############
+#Start here#
+############
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
@@ -28,8 +31,8 @@ class NemoWelcom(QWidget):
         qr.moveCenter(cp)
         self.move(qr.topLeft())
 
-
-
-       
+##########
+#End here#
+##########
 
 

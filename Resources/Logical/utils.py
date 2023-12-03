@@ -1,7 +1,9 @@
+############
+#Start here#
+############
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-from PIL import Image
 import numpy as np
 
 def np2pixmap(array):   
@@ -38,4 +40,7 @@ def convert_to_nums(arr):
         col_tuples.append(calc_numbers(list(col.astype(np.uint8))))
 
     return row_tuples, col_tuples
+##########
+#End here#
+##########
         

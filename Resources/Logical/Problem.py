@@ -1,3 +1,6 @@
+############
+#Start here#
+############
 import numpy as np
 
 class Problem():
@@ -18,5 +21,6 @@ class Problem():
                 if temp_arr_layer.sum() <= (self.pixel_size**2)//2:
                     self.ans_arr[x,y] = 0
                     self.preview[self.pixel_size*x:self.pixel_size*(x+1), self.pixel_size*y:self.pixel_size*(y+1),:] = 0
-
-    
+##########
+#End here#
+##########

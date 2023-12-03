@@ -1,3 +1,6 @@
+############
+#Start here#
+############
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
@@ -60,3 +63,7 @@ class SolvingBoard(QLabel):
                 user_answer[i][j] = self.button_dict[f"{i}_{j}"].state
 
         return user_answer
+    
+##########
+#End here#
+##########

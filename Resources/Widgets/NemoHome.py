@@ -1,4 +1,6 @@
-import sys
+############
+#Start here#
+############
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
@@ -8,9 +10,9 @@ from functools import partial
 class NemoHome(QWidget):
     ChildComponents = []
 
-    def __init__(self, main):
+    def __init__(self, app):
         super().__init__()
-        self.main = main
+        self.app = app
         self.go_make_button = QPushButton("문제 만들기")
         self.go_solve_button = QPushButton("문제 풀기")
         
@@ -19,8 +21,8 @@ class NemoHome(QWidget):
         self.apply_childs()
         self.set_geometries()
         self.set_button_event()
-        
-    
+        self.apply_style_sheet()
+         
     def apply_childs(self):
         for comp in NemoHome.ChildComponents:
             comp.setParent(self)
@@ -31,8 +33,14 @@ class NemoHome(QWidget):
         self.setGeometry(0,0,240,300)
 
     def set_button_event(self):
-        self.go_make_button.clicked.connect(partial(self.main.goto, 1))
-        self.go_solve_button.clicked.connect(partial(self.main.goto, 2))
+        self.go_make_button.clicked.connect(partial(self.app.goto, 1))
+        self.go_solve_button.clicked.connect(partial(self.app.goto, 2))
+
+    def apply_style_sheet(self):
+        self.go_make_button.setStyleSheet("background-color:#CCCCFF;")
+        self.go_solve_button.setStyleSheet("background-color:#CCCCFF;")
 
 
-
+##########
+#End here#
+##########

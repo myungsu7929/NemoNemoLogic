@@ -1,3 +1,6 @@
+############
+#Start here#
+############
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
@@ -10,9 +13,9 @@ from Resources.Components.NemoCanvas import NemoCanvas
 class NemoDraw(QWidget):
     ChildComponents = []
 
-    def __init__(self, main):
+    def __init__(self, app):
         super().__init__()
-        self.main = main
+        self.app = app
         self.statusBar = QStatusBar()
         self.canvas_window = NemoCanvas(self.statusBar)
 
@@ -64,30 +67,36 @@ class NemoDraw(QWidget):
         self.canvas_window.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
 
     def apply_style_sheet(self):
-        self.setStyleSheet('''
-                            QWidget {background-color:orange};
-                                    ''')
-
+      
         self.canvas_window.setStyleSheet('''
                                   QGraphicsView {
                                         border-style: solid;
                                         border-width: 2px;
                                         border-color: black;
                                   }
-                                  
                                   ''')
+        self.upload_button.setStyleSheet("background-color:#CCCCFF;")
+        self.save_button.setStyleSheet("background-color:#CCCCFF;")
+        self.apply_button.setStyleSheet("background-color:#CCCCFF;")
+        self.back_button.setStyleSheet("background-color:#CCCCFF;")
+        self.size_8_button.setStyleSheet("background-color:#CCCCFF;")
+        self.size_16_button.setStyleSheet("background-color:#CCCCFF;")
+        self.size_32_button.setStyleSheet("background-color:#CCCCFF;")
+        self.statusBar.setStyleSheet("background-color:#CCCCFF;")
         
     def set_button_event(self):
         self.upload_button.clicked.connect(self.canvas_window.set_canvas)
         self.save_button.clicked.connect(self.canvas_window.save_problem)
         self.apply_button.clicked.connect(self.canvas_window.apply)
-        self.back_button.clicked.connect(partial(self.main.goto, 0))
+        self.back_button.clicked.connect(partial(self.app.goto, 0))
 
         self.size_8_button.clicked.connect(partial(self.canvas_window.set_problem_size, 8))
         self.size_16_button.clicked.connect(partial(self.canvas_window.set_problem_size, 16))
         self.size_32_button.clicked.connect(partial(self.canvas_window.set_problem_size, 32))
         
-
+##########
+#End here#
+##########
 
 
 

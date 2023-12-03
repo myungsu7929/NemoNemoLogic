@@ -1,3 +1,6 @@
+############
+#Start here#
+############
 import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
@@ -10,7 +13,7 @@ from Resources.Widgets.NemoSolve import NemoSolve
 
 widget_size = {
     0 : QSize(240,300), #home widget
-    1 : QSize(1980, 1080), #problem making widget
+    1 : QSize(1300, 1080), #problem making widget
     2:  QSize(1980, 1080)
 } 
 
@@ -52,3 +55,7 @@ if __name__ == "__main__":
     myapp = NemoApp()
     myapp.show()
     sys.exit(app.exec())
+
+##########
+#End here#
+##########
