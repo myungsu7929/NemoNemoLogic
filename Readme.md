@@ -29,14 +29,29 @@ git clone https://github.com/myungsu7929/NemoNemoLogic
 cd ./NemoNemoLogic
 ~~~
 
-2. 필요한 패키지 및 라이브러리를 설치한다.
+3. 필요한 패키지 및 라이브러리를 설치한다.
 ~~~ bash
 pip install -r requirements.txt
 ~~~
 
-3. NemoApp.py 파일을 실행시킨다.
+4. NemoApp.py 파일을 실행시킨다.
 ~~~ bash
 python ./NemoApp.py
 ~~~
 
-![Uploading Papers\Readme_pictures\homewiget.png]()
+### 문제를 만들 때
+1. "문제 만들기" 버튼을 클릭한다.
+2. 문제 사이즈를 설정한다.
+3. 그림판에 그림을 그리거나 "이미지 업로드하기" 버튼을 클릭해 원하는 이미지를 업로드 한다.  
+4. "도트로 변환" 버튼을 클릭해 그림판 이미지를 도트 이미지로 변환한다.
+5. "문제 저장하기 버튼을 클릭해 원하는 위치에 example.nemo 파일을 만든다.  
+
+#### 단축키  
+    C:  펜과 지우개 모드를 변경
+    X:  그림판 초기화 하기
+    마우스 스크롤: 펜과 지우개 굵기 조절 
+
+### 문제를 풀때
+1. "문제 불러오기" 버튼을 클릭한다. 
+2. 저장해 두었던 nemo파일을 선택한다.
+3. 주어진 힌트에 맞게 문제를 풀고 "정답 확인하기" 버튼을 클릭한다.
