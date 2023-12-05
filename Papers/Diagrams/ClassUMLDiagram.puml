@@ -96,10 +96,4 @@ NemoDraw --> NemoCanvas : call methods with buttons
 NemoCanvas --> Problem: save made problem
 Problem --> NemoSolve: load problem
 
-
-
-
-
-
-
 @enduml
